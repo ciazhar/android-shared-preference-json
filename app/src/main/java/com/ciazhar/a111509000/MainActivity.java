@@ -7,11 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.ciazhar.a111509000.model.Message;
-import com.ciazhar.a111509000.model.MessageAdapter;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,16 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(SendActivity.MY_PREF, Context.MODE_PRIVATE);
 
-        String nama = sharedPreferences.getString("name",null);
-        String content = sharedPreferences.getString("content",null);
+        String jsonMessage = sharedPreferences.getString("allMessage","null");
 
-        messageList.add(new Message("Hafidz","Halo",new Date(),R.drawable.chrysanthemum));
-        messageList.add(new Message("Hafidz","Halo",new Date(),R.drawable.chrysanthemum));
-        messageList.add(new Message("Hafidz","Halo",new Date(),R.drawable.chrysanthemum));
-
-        if (nama!=null&&content!=null){
-            messageList.add(new Message(nama,content,new Date(),R.drawable.chrysanthemum));
-        }
+        Log.i("jsonMessage",jsonMessage);
 
     }
 
