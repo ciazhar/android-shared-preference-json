@@ -45,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("jsonMessage",jsonMessage);
 
+        Gson gson = new Gson();
+
+        Message message = gson.fromJson(jsonMessage,Message.class);
+        messageList.add(message);
+
     }
 
     public void newMessage(View view) {
