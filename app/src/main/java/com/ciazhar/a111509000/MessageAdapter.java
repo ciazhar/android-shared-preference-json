@@ -1,4 +1,4 @@
-package com.ciazhar.a111509000.model;
+package com.ciazhar.a111509000;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ciazhar.a111509000.R;
+import com.ciazhar.a111509000.model.Message;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.Message
     @Override
     public void onBindViewHolder(MessageView holder, int position) {
         Message data = messageList.get(position);
-        holder.image.setImageResource(data.foto);
+        holder.image.setImageResource(data.getFoto());
         holder.name.setText(data.getPengirim());
         holder.message.setText(data.getContent());
         holder.date.setText(data.getWaktu().toString());
