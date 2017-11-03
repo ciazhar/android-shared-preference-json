@@ -11,13 +11,18 @@
     android:orientation="vertical"
     tools:context="com.ciazhar.a111509000.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/main_recycler_view"
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="450dp"
         >
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_recycler_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+        </android.support.v7.widget.RecyclerView>
+    </ScrollView>
 
     <Button
         android:layout_width="wrap_content"
