@@ -12,16 +12,18 @@ import android.view.View;
 
 import com.ciazhar.a111509000.model.Message;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private MessageAdapter messageAdapter;
-    private List<Message> messageList = new ArrayList<>();
+    static List<Message> messageList = new ArrayList<>();
+    List <Message> messageListTemp = new ArrayList<>();
     SharedPreferences sharedPreferences;
 
     @Override
@@ -34,10 +36,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(messageAdapter);
 
-        messageList();
+        try {
+            messageList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void messageList() {
+    private void messageList() throws IOException {
 
         sharedPreferences = getSharedPreferences(SendActivity.MY_PREF, Context.MODE_PRIVATE);
 
@@ -47,9 +53,23 @@ public class MainActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
 
-        Message message = gson.fromJson(jsonMessage,Message.class);
-        messageList.add(message);
+        if (jsonMessage !="null"){
+            messageListTemp = gson.fromJson(jsonMessage,new TypeToken<List<Message>>(){}.getType());
 
+            int i=0;
+            while (i<messageListTemp.size()){
+                messageList.add(new Message(
+                        messageListTemp.get(i).getPengirim(),
+                        messageListTemp.get(i).getContent(),
+                        messageListTemp.get(i).getWaktu(),
+                        messageListTemp.get(i).getFoto()
+                ));
+                i++;
+            }
+
+        }
+
+        messageAdapter.notifyDataSetChanged();
     }
 
     public void newMessage(View view) {
